@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Office Bearers - AISMA Danapur Division</title>
+ <style>
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f9fafc;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #666;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 17px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+
+    nav a:hover {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      box-shadow: 0 4px 15px rgba(101, 66, 233, 0.4);
+    }
+
+    nav a.active {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      box-shadow: 0 6px 20px rgba(101, 66, 233, 0.6);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    header {
+      text-align: center;
+      padding: 10px 20px 10px;
+      background: linear-gradient(1deg, #6a11cb, #2575fc);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      border-radius: 0 0 100px 100px;
+      box-shadow: 0 6px 20px rgba(101, 66, 233, 0.4);
+    }
+
+    header h1 {
+      font-size: 4.0rem;
+      margin-bottom: 1px;
+      text-shadow: 1px 1px 5px rgba(5,5,5,3);
+    }
+
+    header p {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-shadow: 1px 1px 5px rgba(2,2,2,2);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 5px auto 60px;
+      background: #ttt;
+      padding: 10px 35px;
+      border-radius: 25px;
+      box-shadow: 0 8px 30px rgba(101, 66, 233, 0.12);
+      color: #333;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      transition: box-shadow 5.9s ease;
+    }
+
+    main:hover {
+      box-shadow: 0 10px 40px rgba(101, 66, 233, 0.25);
+    }
+
+    main p {
+      margin-bottom: 20px;
+    }
+
+.level-container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    .level-button {
+      background-color: #385DE4;
+      color: Yellow;
+      border: none;
+      padding: 20px 30px;
+      margin: 5px 0;
+      width: 100%;
+      text-align: ;center;
+      font-size: 26px;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .level-button::after {
+      content: '▼';
+      position: absolute;
+      right: 20px;
+      font-size: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .level-button.expanded::after {
+      transform: rotate(180deg);
+    }
+
+    .roles {
+      display: none;
+      background: #e0f2f1;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .role {
+      padding: 8px 0;
+      cursor: pointer;
+      border-bottom: 1px solid #b2dfdb;
+    }
+
+    .role:last-child {
+      border-bottom: none;
+    }
+
+    .role:hover {
+      color: #00796b;
+    }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 80px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .modal h3 {
+      margin: 10px 0 5px;
+    }
+
+    .modal p {
+      margin: 5px 0;
+    }
+
+    .close-btn {
+      color: #888;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+      background: #fff;
+      color: #666;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      box-shadow: inset 0 2px 8px rgba(101, 66, 233, 0.05);
+      user-select: none;
+      margin-top: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.7rem;
+      }
+      header p {
+        font-size: 1.2rem;
+      }
+      nav a {
+        margin: 0 12px;
+        font-size: 15px;
+        padding: 8px 16px;
+      }
+      main {
+        margin: -30px 15px 40px;
+        padding: 30px 20px;
+        font-size: 1rem;
+      }
+    }
+table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px auto;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3CFEF5;
+    }
+
+  </style>
+
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="office.html" class="active">Office Bearers</a>
+  <a href="activities.html">News Updates & Activities</a>
+  <a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<header>
+  <h1>Office Bearers - AISMA Danapur Division</h1>
+</header>
+<div class="level-container">
+
+  <button class="level-button" onclick="toggleSection('zonal')"><strong>Zonal Level</strong></button>
+  <div class="roles" id="zonal">
+    <div class="role" onclick="showModal('zp')">Zonal President (ZP)</div>
+    <div class="role" onclick="showModal('zvp')">Zonal Vice-President (ZVP)</div>
+    <div class="role" onclick="showModal('gs')">Zonal Secretary (ZS)</div>
+    <div class="role" onclick="showModal('jgs')">Joint Zonal Secretary (JZS)</div>
+    <div class="role" onclick="showModal('zsf')">Zonal Secretary-Finance (ZSF)</div>
+    <div class="role" onclick="showModal('zia')">Zonal IT Secretary (ZITS)</div>
+
+    <button class="level-button" onclick="toggleSection('divisional')">Divisional Level</button>
+    <div class="roles" id="divisional">
+      <div class="role" onclick="showModal('dp')">Divisional President (DP)</div>
+      <div class="role" onclick="showModal('dvp')">Divisional Vice-President (DVP)</div>
+      <div class="role" onclick="showModal('ds')">Divisional Secretary (DS)</div>
+      <div class="role" onclick="showModal('jds')">Joint Divisional Secretary (JDS)</div>
+      <div class="role" onclick="showModal('dsf')">Divisional Secretary-Finance (DSF)</div>
+      <div class="role" onclick="showModal('dia')">Divisional IT Secretary (DITS)</div>
+
+      <button class="level-button" onclick="toggleSection('branch')">Branch Level</button>
+      <div class="roles" id="branch">
+        <div class="role" onclick="showModal('bp')">Branch President (BP)</div>
+        <div class="role" onclick="showModal('bs')">Branch Secretary (BS)</div>
+        <div class="role" onclick="showModal('bsf')">Branch Secretary-Finance (BSF)</div>
+        <div class="role" onclick="showModal('bia')">Branch IT Secretary (BITS)</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div id="memberModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img id="memberImg" src="K:\My Drive\Web Items\Image\station masters logo.png", alt="Member Photo">
+    <h3 id="memberName"></h3>
+    <p><strong id="memberRole"></strong></p>
+    <p id="memberContact"></p>
+  </div>
+</div>
+
+<script>
+  const members = {
+    zp: { name: "********** ****", role: "Zonal President", contact: "**********", img:  "https://via.placeholder.com/100"},
+    zvp: { name: "********** ****", role: "Zonal Vice-President", contact: "**********", img: "https://via.placeholder.com/100" },
+    gs: { name: "********** ****", role: "Zonal Secretary", contact: "**********", img: "https://via.placeholder.com/100" },
+    jgs: { name: "********** ****", role: "Joint Zonal Secretary", contact: "**********", img: "https://via.placeholder.com/100" },
+    zsf: { name: "********** ****", role: "Zonal Secretary-Finance", contact: "**********", img: "https://via.placeholder.com/100" },
+    zia: { name: "********** ****", role: "Zonal IT Secretary", contact: "**********	", img: "https://via.placeholder.com/100" },
+
+    dp: { name: "Ajit Kumar", role: "Divisional President", contact: "**********", img: "https://via.placeholder.com/100" },
+    dvp: { name: "********** ****", role: "Divisional Vice-President", contact: "**********", img: "https://via.placeholder.com/100" },
+    ds: { name: "Rajesh Kumar", role: "Divisional Secretary", contact: "**********", img: "https://via.placeholder.com/100" },
+    jds: { name: "Jainendra Prakash", role: "Joint Divisional Secretary", contact: "**********", img: "https://via.placeholder.com/100" },
+    dsf: { name: "******* ******", role: "Divisional Secretary-Finance", contact: "**********", img: "https://via.placeholder.com/100" },
+    dia: { name: "Amar Kant Kumar", role: "Divisional IT Secretary", contact: "9304779128", img: "https://via.placeholder.com/100" },
+
+    bp: { name: "********** ****", role: "Branch President", contact: "**********", img: "https://via.placeholder.com/100" },
+    bs: { name: "********** ****", role: "Branch Secretary", contact: "**********", img: "https://via.placeholder.com/100" },
+    bsf: { name: "********** ****", role: "Branch Secretary-Finance", contact: "**********", img: "https://via.placeholder.com/100" },
+    bia: { name: "********** ****", role: "Branch IT Secretary", contact: "**********", img: "https://via.placeholder.com/100" },
+  };
+
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    const button = document.querySelector(`button[onclick="toggleSection('${id}')"]`);
+    const visible = section.style.display === "block";
+    section.style.display = visible ? "none" : "block";
+    button.classList.toggle("expanded", !visible);
+  }
+
+  function showModal(key) {
+    const member = members[key];
+    document.getElementById("memberName").innerText = member.name;
+    document.getElementById("memberRole").innerText = member.role;
+    document.getElementById("memberContact").innerText = "Contact: " + member.contact;
+    document.getElementById("memberImg").src = member.img;
+    document.getElementById("memberModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("memberModal").style.display = "none";
+  }
+
+  // Optional: close modal if user clicks outside it
+  window.onclick = function(event) {
+    const modal = document.getElementById("memberModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+
+<footer>
+  &copy; 2025 AISMA Danapur Division. All rights reserved.
+</footer>
+
+</body>
+</html>
